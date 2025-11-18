@@ -1,0 +1,223 @@
+@import "tailwindcss";
+
+/* Mapeia tokens de design para utilities do Tailwind v4 */
+@theme {
+  /* Fundos / superfícies */
+  --color-background-primary: var(--background-primary);
+  --color-background-secondary: var(--background-secondary);
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+
+  /* Bordas */
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+
+  /* Texto */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-inverse: var(--text-inverse);
+
+  /* Links / realces */
+  --color-link: var(--link);
+  --color-link-hover: var(--link-hover);
+  --color-highlight: var(--highlight);
+
+  /* Brand */
+  --color-brand-400: var(--brand-400);
+  --color-brand-500: var(--brand-500);
+  --color-brand-600: var(--brand-600);
+  --color-brand-700: var(--brand-700);
+
+  /* Header/Footer */
+  --color-header-bg: var(--header-bg);
+  --color-header-text: var(--header-text);
+  --color-footer-bg: var(--footer-bg);
+  --color-footer-text: var(--footer-text);
+
+  /* Botões */
+  --color-button-primary-bg: var(--button-primary-bg);
+  --color-button-primary-hover: var(--button-primary-hover);
+  --color-button-primary-text: var(--button-primary-text);
+
+  --color-button-secondary-bg: var(--button-secondary-bg);
+  --color-button-secondary-hover: var(--button-secondary-hover);
+  --color-button-secondary-text: var(--button-secondary-text);
+  --color-button-outline-border: var(--button-outline-border);
+
+  /* Estados */
+  --color-success-bg: var(--success-bg);
+  --color-success-text: var(--success-text);
+  --color-warning-bg: var(--warning-bg);
+  --color-warning-text: var(--warning-text);
+  --color-danger-bg: var(--danger-bg);
+  --color-danger-text: var(--danger-text);
+  --color-info-bg: var(--info-bg);
+  --color-info-text: var(--info-text);
+
+  /* Disabled */
+  --color-disabled-bg: var(--disabled-bg);
+  --color-disabled-text: var(--disabled-text);
+  --color-disabled-border: var(--disabled-border);
+
+  /* Focus / sombra */
+  --color-focus-ring: var(--focus-ring);
+  --shadow-soft: 0 18px 45px rgba(25, 35, 52, 0.25);
+
+  /* Inputs / Cards / Painéis */
+  --color-card-bg: var(--card-bg);
+  --color-panel-bg: var(--panel-bg);
+  --color-input-bg: var(--input-bg);
+  --color-input-border: var(--input-border);
+  --color-input-text: var(--input-text);
+  --color-input-placeholder: var(--input-placeholder);
+}
+
+:root {
+  color-scheme: light;
+
+  /* Brand (escala) */
+  --brand-400: #60a5fa;
+  --brand-500: #3b82f6;
+  --brand-600: #2563eb; /* primário */
+  --brand-700: #1d4ed8; /* hover/active */
+
+  /* Fundos / superfícies */
+  --background-primary: #f7f7f9;
+  --background-secondary: #ffffff;
+  --surface: #ffffff;
+  --surface-alt: #f2f4f7;
+
+  /* Borders */
+  --border: #e5e7eb;
+  --border-subtle: #e5e7eb;
+  --border-strong: #9ca3af;
+
+  /* Texto */
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --text-inverse: #f8fafc;
+
+  /* Links / realces (alias brand) */
+  --link: var(--brand-600);
+  --link-hover: var(--brand-700);
+  --highlight: #eef2ff;
+
+  /* Header/Footer / Navegação */
+  --header-bg: #0f172a;
+  --header-text: #f8fafc;
+  --nav-bg: var(--header-bg);
+  --nav-text: var(--header-text);
+  --footer-bg: #020617;
+  --footer-text: #9ca3af;
+
+  /* Botões (alias brand) */
+  --button-primary-bg: var(--brand-600);
+  --button-primary-hover: var(--brand-700);
+  --button-primary-text: #ffffff;
+
+  --button-secondary-bg: #e5e7eb;
+  --button-secondary-hover: #d1d5db;
+  --button-secondary-text: #111827;
+  --button-outline-border: #cbd5e1;
+
+  /* Inputs / Cards / Painéis */
+  --card-bg: var(--background-secondary);
+  --panel-bg: var(--surface-alt);
+  --input-bg: #ffffff;
+  --input-border: #cbd5e1;
+  --input-text: var(--text-primary);
+  --input-placeholder: var(--text-muted);
+
+  /* Estados (acessíveis) */
+  --success-bg: #047857;
+  --success-text: #ffffff;
+  --warning-bg: #f59e0b;
+  --warning-text: #111827;
+  --danger-bg: #dc2626;
+  --danger-text: #ffffff;
+  --info-bg: #0e7490;
+  --info-text: #ffffff;
+
+  /* Disabled */
+  --disabled-bg: #e5e7eb;
+  --disabled-text: #9ca3af;
+  --disabled-border: #d1d5db;
+
+  /* Acessibilidade/UX */
+  --focus-ring: var(--brand-600);
+  --shadow-color: 25, 35, 52;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Fundos / superfícies */
+  --background-primary: #0b1220;
+  --background-secondary: #0f172a;
+  --surface: #111827;
+  --surface-alt: #0b1220;
+
+  /* Texto */
+  --text-primary: #e5e7eb;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-inverse: #0f172a;
+
+  /* Links / realces */
+  --link: #60a5fa;
+  --link-hover: #3b82f6;
+  --highlight: #1e293b;
+
+  /* Header/Footer */
+  --header-bg: #0b1220;
+  --header-text: #e5e7eb;
+  --nav-bg: var(--header-bg);
+  --nav-text: var(--header-text);
+  --footer-bg: #020617;
+  --footer-text: #6b7280;
+
+  /* Botões */
+  --button-primary-bg: var(--brand-600);
+  --button-primary-hover: var(--brand-700);
+  --button-primary-text: #ffffff;
+
+  --button-secondary-bg: #1f2937;
+  --button-secondary-hover: #334155;
+  --button-secondary-text: #e5e7eb;
+
+  /* Inputs / Cards / Painéis */
+  --card-bg: var(--surface);
+  --panel-bg: var(--background-secondary);
+  --input-bg: #020617;
+  --input-border: #1f2937;
+  --input-text: var(--text-primary);
+  --input-placeholder: var(--text-muted);
+
+  /* Estados */
+  --success-bg: #065f46;
+  --success-text: #ffffff;
+  --warning-bg: #b45309;
+  --warning-text: #ffffff;
+  --danger-bg: #dc2626;
+  --danger-text: #ffffff;
+  --info-bg: #0e7490;
+  --info-text: #ffffff;
+
+  /* Disabled */
+  --disabled-bg: #1f2937;
+  --disabled-text: #6b7280;
+  --disabled-border: #374151;
+
+  --focus-ring: #60a5fa;
+}
+
+/* Aplica de fato no body */
+body {
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
