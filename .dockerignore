@@ -1,0 +1,21 @@
+# dependências locais
+node_modules
+npm-debug.log
+yarn.lock
+.pnpm-store
+
+# build local
+.next
+dist
+out
+
+# arquivos de sistema / editor
+.DS_Store
+*.swp
+*.log
+.vscode
+.idea
+
+# git
+.git
+.gitignore 

@@ -1,0 +1,21 @@
+version: "3.8"
+
+
+services:
+  web:
+    container_name: paad_frontend
+    build:
+      context: .
+      target: dev
+    restart: always
+    command: npm run dev -- --webpack
+    environment:
+      - NODE_ENV=development
+      - WATCHPACK_POLLING=true
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000" 
+
