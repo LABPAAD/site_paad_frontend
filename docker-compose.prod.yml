@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  web:
+    container_name: paad_frontend_prod
+    build:
+      context: .
+      # aqui usamos o estágio final do Dockerfile (runner)
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+    ports:
+      - "3000:3000" 
