@@ -1,7 +1,14 @@
 
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
-type ButtonVariant = "primary" | "secondary" | "outline" | "ghost";
+type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "outline"
+  | "ghost"
+  | "danger"
+  | "dangerGhost";
+
 type ButtonSize = "sm" | "md" | "lg" | "icon";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -35,8 +42,8 @@ export function Button({
   const isDisabled = disabled || isLoading;
 
   const baseClasses =
-  "inline-flex items-center justify-center gap-2 rounded-full text-xs font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring disabled:cursor-not-allowed disabled:opacity-60";
-  
+    "inline-flex items-center justify-center gap-2 rounded-full text-xs font-medium cursor-pointer leading-none transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring disabled:cursor-not-allowed disabled:opacity-60";
+
   const variantClasses: Record<ButtonVariant, string> = {
     primary:
       "bg-button-primary-bg text-button-primary-text shadow-md hover:bg-button-primary-hover",
@@ -44,18 +51,25 @@ export function Button({
       "bg-button-secondary-bg text-button-secondary-text hover:bg-button-secondary-hover",
     outline:
       "border border-button-outline-border text-text-primary bg-transparent hover:bg-surface-alt",
-    ghost:
-      "bg-transparent text-text-secondary hover:bg-surface-alt",
+    ghost: "bg-transparent text-text-secondary hover:bg-surface-alt",
+    danger:
+      "bg-danger-bg text-danger-text shadow-md hover:brightness-95",
+    dangerGhost:
+      "text-danger-bg bg-transparent hover:bg-danger-bg/10 dark:hover:bg-danger-bg/15",
   };
 
+  // 👉 Agora cada tamanho tem altura fixa: se dois botões usam o mesmo size,
+  // eles terão exatamente a mesma altura (com ou sem ícone).
   const sizeClasses: Record<ButtonSize, string> = {
-    sm: "px-3 py-1.5 text-xs",
-    md: "px-4 py-2 text-sm",
-    lg: "px-5 py-2.5 text-sm",
+    sm: "h-9 px-3 text-xs",   // ~36px
+    md: "h-10 px-4 text-sm",  // ~40px
+    lg: "h-11 px-5 text-sm",  // ~44px
     icon: "h-9 w-9 rounded-full p-0",
   };
 
   const loadingClasses = isLoading ? "cursor-wait" : "";
+
+  const isSimpleTextChild = typeof children === "string";
 
   return (
     <button
@@ -77,14 +91,23 @@ export function Button({
       )}
 
       {!isLoading && leftIcon && (
-        <span className="flex items-center justify-center">{leftIcon}</span>
+        <span className="flex items-center justify-center leading-none">
+          {leftIcon}
+        </span>
       )}
 
-      {children && <span className="truncate">{children}</span>}
+      {children &&
+        (isSimpleTextChild ? (
+          <span className="truncate">{children}</span>
+        ) : (
+          children
+        ))}
 
       {!isLoading && rightIcon && (
-        <span className="flex items-center justify-center">{rightIcon}</span>
+        <span className="flex items-center justify-center leading-none">
+          {rightIcon}
+        </span>
       )}
     </button>
   );
-}
+} 
