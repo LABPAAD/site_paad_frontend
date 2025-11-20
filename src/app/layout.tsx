@@ -1,17 +1,21 @@
+
+import type { ReactNode } from "react";
 import type { Metadata } from "next";
-import "./globals.css";
 import { Inter } from "next/font/google";
+
+import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { AuthProvider } from "@/components/auth/AuthProvider";
 
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
-
-export const metadata = {
+export const metadata: Metadata = {
   title: "PAAD • UFPI",
-  description: "Plataforma para gestão e divulgação de projetos, pessoas e publicações do Laboratório PAAD.",
+  description:
+    "Plataforma para gestão e divulgação de projetos, pessoas e publicações do Laboratório PAAD.",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -25,21 +29,15 @@ export const metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning data-theme="light">
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400&display=swap"
-        />
-      </head>
+    <html lang="pt-BR" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider>
-          {children}
+          <AuthProvider>{children}</AuthProvider>
         </ThemeProvider>
       </body>
     </html>
   );
-}
+} 

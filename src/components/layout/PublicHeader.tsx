@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -7,6 +6,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { useTheme } from "@/components/theme/ThemeProvider";
+import { useAuth } from "@/components/auth/AuthProvider";
 
 type UserRole =
   | "VISITANTE"
@@ -35,6 +35,7 @@ export function PublicHeader({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const { theme } = useTheme();
+  const { logout } = useAuth();
 
   const canAccessAdminPanel =
     userRole === "ADMINISTRADOR" || userRole === "COORDENADOR";
@@ -43,6 +44,12 @@ export function PublicHeader({
 
   const logoSrc =
     theme === "dark" ? "/logo_paad_branca.png" : "/logo_paad.png";
+
+  async function handleLogout() {
+    await logout();
+    setIsUserMenuOpen(false);
+    setIsMobileMenuOpen(false);
+  }
 
   return (
     // header relativo para o menu mobile absoluto
@@ -90,6 +97,9 @@ export function PublicHeader({
 
         {/* Ações – desktop (a partir de sm) */}
         <div className="hidden items-center gap-3 sm:flex">
+          {/* Theme toggle sempre visível no desktop */}
+          <ThemeToggle />
+
           {!isAuthenticated && (
             <Link href={loginHref}>
               <Button variant="primary" size="md">
@@ -121,7 +131,7 @@ export function PublicHeader({
               </Button>
 
               {isUserMenuOpen && (
-                <div className="absolute right-0 z-20 mt-2 w-48 rounded-xl border border-border-subtle bg-surface py-1 text-sm shadow-lg">
+                <div className="absolute right-0 z-20 mt-2 w-52 rounded-xl border border-border-subtle bg-surface py-1 text-sm shadow-lg">
                   {canAccessAdminPanel && (
                     <Link
                       href={adminHref}
@@ -131,6 +141,7 @@ export function PublicHeader({
                       Acessar painel
                     </Link>
                   )}
+
                   <Link
                     href={profileHref}
                     className="flex w-full items-center px-3 py-2 text-xs text-text-primary transition-colors hover:bg-surface-alt"
@@ -139,7 +150,16 @@ export function PublicHeader({
                     Meu perfil
                   </Link>
 
-                  <ThemeToggle />
+                  <button
+                    type="button"
+                    className="flex w-full items-center gap-2 px-3 py-2 text-xs font-medium text-danger-bg transition-colors hover:bg-surface-alt cursor-pointer"
+                    onClick={handleLogout}
+                  >
+                    <span className="material-symbols-outlined text-[16px] leading-none">
+                      logout
+                    </span>
+                    <span>Sair</span>
+                  </button>
                 </div>
               )}
             </div>
@@ -189,6 +209,11 @@ export function PublicHeader({
           </nav>
 
           <div className="mt-4 flex flex-col gap-2">
+            {/* Theme toggle no mobile (sempre disponível) */}
+            <div className="mb-2">
+              <ThemeToggle />
+            </div>
+
             {!isAuthenticated && (
               <Link href={loginHref}>
                 <Button
@@ -228,7 +253,15 @@ export function PublicHeader({
                   </Button>
                 </Link>
 
-                <ThemeToggle />
+                <Button
+                  type="button"
+                  variant="dangerGhost"
+                  size="sm"
+                  className="w-full text-danger-bg"
+                  onClick={handleLogout}
+                >
+                  Sair
+                </Button>
               </>
             )}
           </div>
